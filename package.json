@@ -1,0 +1,30 @@
+{
+  "name": "bookmarker",
+  "version": "0.0.1",
+  "description": "A bookmark utility to save and retrieve URLs for later.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/code303/bookmarker.git"
+  },
+  "keywords": [
+    "bookmark"
+  ],
+  "author": "code303",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/code303/bookmarker/issues"
+  },
+  "homepage": "https://github.com/code303/bookmarker#readme",
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
