@@ -8,7 +8,6 @@ const path = require('path');
 const app = (0, express_1.default)();
 const PORT = 3000;
 const bookmarksRouter = require('./api/bookmarks');
-// Serve static files from the "static" directory
 app.use(express_1.default.static(path.join(__dirname, 'static')));
 app.use('/api/bookmarks', bookmarksRouter);
 app.get('/', (req, res) => {
