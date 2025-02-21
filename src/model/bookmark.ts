@@ -1,7 +1,5 @@
-import { UUID } from "crypto";
-
 interface Bookmark {
-    id: UUID;
+    id: string;
     title: string;
     url: string;
     description: string;

@@ -32,16 +32,27 @@ class Database {
     return bookmark;
   }
 
-  public addBookmark(id: string): string {
-    return 'Add a new bookmark';
+  public addBookmark(bookmark: Bookmark): Bookmark {
+    // save the bookmark to the database
+    return bookmark;
   }
 
   public updateBookmark(id: string): string {
     return `Update bookmark with id ${id}`;
   }
 
-  public deleteBookmark(id: string): string {
-    return `Delete bookmark with id ${id}`;
+  public deleteBookmark(id: string): boolean {
+    if (this.bookmarkExists(id)) {
+      // ToDo: delete bookmark from database
+      return true;
+    } else {
+      throw new Error('Bookmark not found');
+    }
+  }
+
+  public bookmarkExists(id: string): boolean {
+    // ToDo: check if bookmark exists in database
+    return true;
   }
 }
 
