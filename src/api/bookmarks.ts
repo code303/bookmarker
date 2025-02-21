@@ -24,7 +24,7 @@ router.get('/:id', (req: Request, res: Response) => {
 router.post('/', (req: Request, res: Response) => {
   const bookmark: Bookmark = createBookmark(req.body);
   const createdBookmark = database.addBookmark(bookmark);
-  res.send(createBookmark);
+  res.send(createdBookmark);
 });
 
 router.put('/:id', (req: Request, res: Response) => {

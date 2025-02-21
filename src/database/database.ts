@@ -1,22 +1,27 @@
 import Bookmark from "../model/bookmark";
+import SQLite from "./sqlite/sqlite";
 
 class Database {
   private static instance: Database;
+  private sqlite: SQLite;
 
   private constructor() {
     // Initialize database connection
+    this.sqlite = SQLite.getInstance();
   }
 
   public static getInstance(): Database {
     if (!Database.instance) {
       Database.instance = new Database();
     }
-
     return Database.instance;
   }
 
-  public getBookmarks(): string {
-    return 'Get all bookmarks.';
+  public getBookmarks(): Bookmark[] {
+    let bookmarks: Bookmark[] = [];
+    bookmarks = this.sqlite.getBookmarks();
+    console.log(`Found ${bookmarks.length} bookmarks`);
+    return bookmarks;
 }
 
   public getBookmark(id: string): Bookmark {
@@ -34,6 +39,7 @@ class Database {
 
   public addBookmark(bookmark: Bookmark): Bookmark {
     // save the bookmark to the database
+    this.sqlite.insertBookmark(bookmark);
     return bookmark;
   }
 

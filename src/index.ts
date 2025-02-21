@@ -7,6 +7,7 @@ const bookmarksRouter = require('./api/bookmarks');
 
 app.use(express.static(path.join(__dirname, 'static')));
 
+app.use(express.json());
 app.use('/api/bookmarks', bookmarksRouter);
 
 app.get('/', (req, res) => {
