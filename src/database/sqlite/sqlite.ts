@@ -42,23 +42,30 @@ class SQLite {
         return bookmark;
     }
 
-    public getBookmarks(): Bookmark[] {
-        const bookmarks: Bookmark[] = [];
-        this.db.each("SELECT id, title, url, description, tags, created, updated FROM bookmarks", (err, row: Bookmark) => {
-            if (err) {
-                throw err;
-            }
-            bookmarks.push({
-                id: row.id,
-                title: row.title,
-                url: row.url,
-                description: row.description,
-                tags: row.tags,
-                created: row.created,
-                updated: row.updated
-            } as Bookmark);
-        });
-        return bookmarks;
+    public getBookmarks(): Promise<Bookmark[]> {
+        return new Promise((resolve, reject) => {
+            const bookmarks: Bookmark[] = [];
+            this.db.each("SELECT id, title, url, description, tags, created, updated FROM bookmarks", (err, row: Bookmark) => {
+                if (err) {
+                    reject(err);
+                }
+                bookmarks.push({
+                    id: row.id,
+                    title: row.title,
+                    url: row.url,
+                    description: row.description,
+                    tags: row.tags,
+                    created: row.created,
+                    updated: row.updated
+                } as Bookmark);
+            }, (err, count) => {
+                if (err) {
+                    reject(err);
+                }
+                resolve(bookmarks);
+            });
+        }); 
+           
     }
 
     public getBookmark(id: string): Bookmark {

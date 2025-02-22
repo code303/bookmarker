@@ -6,9 +6,9 @@ const router = express.Router();
 const database = Database.getInstance();
 
 // routes for bookmarks
-router.get('/', (req: Request, res: Response) => {
-  const bookmarks = database.getBookmarks();
-  res.send(bookmarks);
+router.get('/', async (req: Request, res: Response) => {
+  const bookmarks = await database.getBookmarks();
+  res.json(bookmarks);
 });
 
 router.get('/:id', (req: Request, res: Response) => {
