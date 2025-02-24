@@ -17,10 +17,8 @@ class Database {
     return Database.instance;
   }
 
-public async getBookmarks(): Promise<Bookmark[]> {
-    let bookmarks: Bookmark[] = await this.sqlite.getBookmarks();
-    console.log(`Found ${bookmarks.length} bookmarks`);
-    return bookmarks;
+public getBookmarks(): Promise<Bookmark[]> {
+  return this.sqlite.getBookmarks();
 }
 
   public getBookmark(id: string): Bookmark {
