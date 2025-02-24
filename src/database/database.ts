@@ -21,17 +21,8 @@ class Database {
     return this.sqlite.getBookmarks();
   }
 
-  public getBookmark(id: string): Bookmark {
-    const bookmark: Bookmark = {
-        id: '123e4567-e89b-12d3-a456-426614174000',
-        title: 'My Bookmark',
-        url: 'https://www.example.com',
-        description: 'This is a bookmark',
-        tags: ['tag1', 'tag2'],
-        created: Date.now(),
-        updated: Date.now()
-        } as Bookmark;
-    return bookmark;
+  public getBookmark(id: string): Promise<Bookmark> {
+    return this.sqlite.getBookmark(id);
   }
 
   public addBookmark(bookmark: Bookmark): Bookmark {

@@ -11,13 +11,13 @@ router.get('/', async (req: Request, res: Response) => {
   res.json(bookmarks);
 });
 
-router.get('/:id', (req: Request, res: Response) => {
+router.get('/:id', async (req: Request, res: Response) => {
   const id: string = req.params.id;
   try {
-    const bookmark: Bookmark = database.getBookmark(id);
-    res.send(bookmark);
-  } catch (error) {
-    res.status(404).send('Bookmark not found');
+    const bookmark: Bookmark = await database.getBookmark(id);
+    res.json(bookmark);
+  } catch (error: Error | any) {
+    res.status(404).send(error.message);
   }
 });
 

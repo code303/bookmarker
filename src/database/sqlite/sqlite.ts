@@ -45,18 +45,18 @@ class SQLite {
     public getBookmarks(): Promise<Bookmark[]> {
         return new Promise((resolve, reject) => {
             const bookmarks: Bookmark[] = [];
-            this.db.each("SELECT id, title, url, description, tags, created, updated FROM bookmarks", (err, row: Bookmark) => {
+            this.db.each("SELECT id, title, url, description, tags, created, updated FROM bookmarks", (err, bookmark: Bookmark) => {
                 if (err) {
                     reject(err);
                 }
                 bookmarks.push({
-                    id: row.id,
-                    title: row.title,
-                    url: row.url,
-                    description: row.description,
-                    tags: row.tags,
-                    created: row.created,
-                    updated: row.updated
+                    id: bookmark.id,
+                    title: bookmark.title,
+                    url: bookmark.url,
+                    description: bookmark.description,
+                    tags: bookmark.tags,
+                    created: bookmark.created,
+                    updated: bookmark.updated
                 } as Bookmark);
             }, (err, count) => {
                 if (err) {
@@ -68,23 +68,27 @@ class SQLite {
            
     }
 
-    public getBookmark(id: string): Bookmark {
-        let bookmark: Bookmark = {} as Bookmark;
-        this.db.each("SELECT id, title, url, description, tags, created, updated FROM bookmarks WHERE id = ?", [id], (err, row: Bookmark) => {
-            if (err) {
-                throw err;
-            }
-            bookmark = {
-                id: row.id,
-                title: row.title,
-                url: row.url,
-                description: row.description,
-                tags: row.tags,
-                created: row.created,
-                updated: row.updated
-            } as Bookmark;
+    public getBookmark(id: string): Promise<Bookmark> {
+        return new Promise((resolve, reject) => {
+            this.db.get("SELECT id, title, url, description, tags, created, updated FROM bookmarks WHERE id = ?", [id], (err, bookmark: Bookmark) => {
+                if (err) {
+                    reject(err);
+                }
+                if (bookmark) {
+                    resolve({
+                        id: bookmark.id,
+                        title: bookmark.title,
+                        url: bookmark.url,
+                        description: bookmark.description,
+                        tags: bookmark.tags,
+                        created: bookmark.created,
+                        updated: bookmark.updated
+                    } as Bookmark);
+                } else {
+                    reject(new Error('Bookmark not found'));
+                }
+            });
         });
-        return bookmark;
     }
 
     public updateBookmark(bookmark: Bookmark): Bookmark {
