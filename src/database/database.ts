@@ -17,9 +17,9 @@ class Database {
     return Database.instance;
   }
 
-public getBookmarks(): Promise<Bookmark[]> {
-  return this.sqlite.getBookmarks();
-}
+  public getBookmarks(): Promise<Bookmark[]> {
+    return this.sqlite.getBookmarks();
+  }
 
   public getBookmark(id: string): Bookmark {
     const bookmark: Bookmark = {
