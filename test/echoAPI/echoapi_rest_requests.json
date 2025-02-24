@@ -41,7 +41,7 @@
 			"target_type": "api",
 			"name": "HTTP Root",
 			"version": 1,
-			"sort": 8,
+			"sort": 3,
 			"description": "",
 			"method": "GET",
 			"url": "http://localhost:3000/",
@@ -261,7 +261,7 @@
 			"target_type": "api",
 			"name": "HTTP All bookmarks",
 			"version": 1,
-			"sort": 7,
+			"sort": 2,
 			"description": "",
 			"method": "GET",
 			"url": "http://localhost:3000/api/bookmarks",
@@ -616,10 +616,10 @@
 			"target_type": "api",
 			"name": "HTTP bookmark by ID",
 			"version": 0,
-			"sort": 6,
+			"sort": 1,
 			"description": "",
 			"method": "GET",
-			"url": "http://localhost:3000/api/bookmarks",
+			"url": "http://localhost:3000/api/bookmarks/7956c83d-3f6a-4ea1-b3ec-a54a18c192c0",
 			"mark_id": "",
 			"protocol": "http/1.1",
 			"request": {
@@ -811,7 +811,239 @@
 			},
 			"attribute_info": {},
 			"tags": [],
-			"created_at": "2025-02-18T00:37:34+01:00"
+			"created_at": "2025-02-18T00:37:34+01:00",
+			"is_create": -1,
+			"is_changed": -1
+		},
+		{
+			"project_id": "",
+			"target_id": "39c2ba04701006",
+			"parent_id": "39b935d57ac019",
+			"target_type": "api",
+			"name": "HTTP Request",
+			"sort": 4,
+			"version": 0,
+			"mark_id": "",
+			"status": 1,
+			"is_changed": 1,
+			"is_create": -1,
+			"method": "POST",
+			"url": "http://localhost:3000/api/bookmarks",
+			"request": {
+				"auth": {
+					"type": "inherit",
+					"kv": {
+						"key": "",
+						"value": "",
+						"in": "header"
+					},
+					"bearer": {
+						"key": ""
+					},
+					"basic": {
+						"username": "",
+						"password": ""
+					},
+					"digest": {
+						"username": "",
+						"password": "",
+						"realm": "",
+						"nonce": "",
+						"algorithm": "MD5",
+						"qop": "",
+						"nc": "",
+						"cnonce": "",
+						"opaque": "",
+						"disableRetryRequest": false
+					},
+					"oauth1": {
+						"consumerKey": "",
+						"consumerSecret": "",
+						"signatureMethod": "HMAC-SHA1",
+						"addEmptyParamsToSign": true,
+						"includeBodyHash": true,
+						"addParamsToHeader": false,
+						"realm": "",
+						"version": "1.0",
+						"nonce": "",
+						"timestamp": "",
+						"verifier": "",
+						"callback": "",
+						"tokenSecret": "",
+						"token": "",
+						"disableHeaderEncoding": false
+					},
+					"oauth2": {
+						"addTokenTo": "header",
+						"headerPrefix": "Bearer",
+						"access_token": "",
+						"grant_type": "password_credentials",
+						"redirect_uri": "",
+						"authUrl": "",
+						"accessTokenUrl": "",
+						"clientId": "",
+						"clientSecret": "",
+						"username": "",
+						"password": "",
+						"challengeAlgorithm": "S256",
+						"code_verifier": "Bearer",
+						"scope": "",
+						"state": "",
+						"client_authentication": "header",
+						"refreshTokenUrl": "",
+						"authRequestParams": [],
+						"tokenRequestParams": [],
+						"refreshRequestParams": []
+					},
+					"hawk": {
+						"authId": "",
+						"authKey": "",
+						"algorithm": "",
+						"user": "",
+						"nonce": "",
+						"extraData": "",
+						"app": "",
+						"delegation": "",
+						"timestamp": "",
+						"includePayloadHash": false
+					},
+					"awsv4": {
+						"accessKey": "",
+						"secretKey": "",
+						"region": "",
+						"service": "",
+						"sessionToken": "",
+						"addAuthDataToQuery": false
+					},
+					"ntlm": {
+						"username": "",
+						"password": "",
+						"domain": "",
+						"workstation": "",
+						"disableRetryRequest": false
+					},
+					"edgegrid": {
+						"accessToken": "",
+						"clientToken": "",
+						"clientSecret": "",
+						"nonce": "",
+						"timestamp": "",
+						"baseURi": "",
+						"headersToSign": ""
+					},
+					"noauth": {},
+					"jwt": {
+						"addTokenTo": "header",
+						"algorithm": "HS256",
+						"secret": "",
+						"isSecretBase64Encoded": false,
+						"payload": "",
+						"headerPrefix": "Bearer",
+						"queryParamKey": "token",
+						"header": ""
+					},
+					"asap": {
+						"alg": "HS256",
+						"iss": "",
+						"aud": "",
+						"kid": "",
+						"privateKey": "",
+						"sub": "",
+						"claims": "",
+						"exp": ""
+					}
+				},
+				"body": {
+					"mode": "json",
+					"parameter": [],
+					"raw": "{\r\n    \"id\": \"123e4567-e89b-12d3-a456-426614174000\",\r\n    \"title\": \"My Bookmark\",\r\n    \"url\": \"https://www.example.com\",\r\n    \"description\": \"This is a bookmark\",\r\n    \"tags\": [\"tag1\", \"tag2\"],\r\n    \"created\": 1739838165524,\r\n    \"updated\": 1739838165524\r\n}",
+					"raw_parameter": [],
+					"raw_schema": {
+						"type": "object"
+					},
+					"binary": null
+				},
+				"pre_tasks": [],
+				"post_tasks": [],
+				"header": {
+					"parameter": [
+						{
+							"description": "",
+							"field_type": "String",
+							"is_checked": 1,
+							"key": "Content-Type",
+							"value": "application/json",
+							"not_null": 1,
+							"param_id": "39c9d3b8301006"
+						}
+					]
+				},
+				"query": {
+					"parameter": [],
+					"query_add_equal": 1
+				},
+				"cookie": {
+					"parameter": []
+				},
+				"restful": {
+					"parameter": []
+				}
+			},
+			"response": {
+				"is_check_result": 1,
+				"example": [
+					{
+						"example_id": "1",
+						"raw": "",
+						"raw_parameter": [],
+						"expect": {
+							"name": "Success",
+							"is_default": 1,
+							"code": "200",
+							"content_type": "json",
+							"verify_type": "schema",
+							"mock": "",
+							"schema": {
+								"type": "object",
+								"properties": {}
+							}
+						}
+					},
+					{
+						"example_id": "2",
+						"raw": "",
+						"raw_parameter": [],
+						"expect": {
+							"name": "Failure",
+							"is_default": -1,
+							"code": "404",
+							"content_type": "json",
+							"verify_type": "schema",
+							"mock": "",
+							"schema": {
+								"type": "object",
+								"properties": {}
+							}
+						}
+					}
+				]
+			},
+			"description": "",
+			"tags": [],
+			"ai_expect_enable": -1,
+			"is_check_result": 1,
+			"is_socket": 1,
+			"is_locked": -1,
+			"is_force": -1,
+			"attribute_info": {},
+			"protocol": "http/1.1",
+			"ai_expect": {
+				"list": [],
+				"none_math_expect_id": ""
+			},
+			"is_deleted": -1,
+			"is_conflicted": -1,
+			"vscode_version": "1.7.1"
 		}
 	]
 }
