@@ -1,5 +1,5 @@
 import sqlite3 from 'sqlite3';
-import path from 'path';
+import path, { resolve } from 'path';
 import Bookmark from '../../model/bookmark';
 
 class SQLite {
@@ -94,14 +94,16 @@ class SQLite {
         });
     }
 
-    public updateBookmark(bookmark: Bookmark): Bookmark {
-        this.db.run("UPDATE bookmarks SET title = ?, url = ?, description = ?, tags = ?, updated = ? WHERE id = ?", [bookmark.title, bookmark.url, bookmark.description, bookmark.tags.join(','), bookmark.updated, bookmark.id], function (err) {
-            if (err) {
-                return console.error(err.message);
-            }
-            console.log(`A bookmark has been updated with id ${bookmark.id}`);
+    public updateBookmark(bookmark: Bookmark): Promise<Bookmark> {
+        return new Promise((resolve, reject) => {
+            this.db.run("UPDATE bookmarks SET title = ?, url = ?, description = ?, tags = ?, updated = ? WHERE id = ?", [bookmark.title, bookmark.url, bookmark.description, bookmark.tags.join(','), bookmark.updated, bookmark.id], function (err) {
+                if (err) {
+                    reject(err);
+                }
+                console.log(`A bookmark has been updated with id ${bookmark.id}`);
+                resolve(bookmark);
+            });
         });
-        return bookmark;
     }
 
     public deleteBookmark(id: string): Promise<boolean> {

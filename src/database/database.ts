@@ -29,8 +29,13 @@ class Database {
     return this.sqlite.insertBookmark(bookmark);
   }
 
-  public updateBookmark(id: string): string {
-    return `Update bookmark with id ${id}`;
+  public updateBookmark(bookmark: Bookmark): Promise<Bookmark> {
+    const id: string = bookmark.id;
+    if (this.bookmarkExists(id)) {
+      return this.sqlite.updateBookmark(bookmark);
+    } else {
+      return this.addBookmark(bookmark);
+    }
   }
 
   public deleteBookmark(id: string): Promise<boolean> {

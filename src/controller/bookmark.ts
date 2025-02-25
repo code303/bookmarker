@@ -1,18 +1,20 @@
 import { randomUUID } from "crypto";
 import Bookmark from "../model/bookmark";
 
-function createBookmark(data: Bookmark): Bookmark {
-    const uuid:string = randomUUID();
+export function createBookmark(data: Bookmark): Bookmark {
+    return createBookmarkWithId(randomUUID(), data);
+}
+
+export function createBookmarkWithId(uuid: string, data: Bookmark): Bookmark {
 
     return {
         id: uuid,
-        title: 'My Bookmark',
-        url: 'https://www.example.com',
-        description: 'This is a bookmark',
-        tags: ['tag1', 'tag2'],
-        created: Date.now(),
+        title: data.title,
+        url: data.url,
+        description: data.description,
+        tags: data.tags,
+        created: data.created || Date.now(),
         updated: Date.now()
         } as Bookmark;
 }
 
-export default createBookmark;

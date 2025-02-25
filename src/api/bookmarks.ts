@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 import Database from '../database/database';
 import Bookmark from '../model/bookmark';
-import createBookmark from '../controller/bookmark';
+import {createBookmark, createBookmarkWithId} from '../controller/bookmark';
 const router = express.Router();
 const database = Database.getInstance();
 
@@ -24,11 +24,13 @@ router.get('/:id', async (req: Request, res: Response) => {
 router.post('/', async (req: Request, res: Response) => {
   const bookmark: Bookmark = createBookmark(req.body);
   const createdBookmark = await database.addBookmark(bookmark);
-  res.send(createdBookmark);
+  res.json(createdBookmark);
 });
 
-router.put('/:id', (req: Request, res: Response) => {
-  res.send(`Update bookmark with id ${req.params.id}`);
+router.put('/:id', async (req: Request, res: Response) => {
+  const bookmark: Bookmark = createBookmarkWithId(req.params.id, req.body);
+  const updatedBookmark = await database.updateBookmark(bookmark);
+  res.json(updatedBookmark);
 });
 
 router.delete('/:id', async (req: Request, res: Response) => {
