@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Bookmark</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            padding: 16px;
+            max-width: 100%;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .form-group {
+            margin-bottom: 16px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+            color: #555;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .button-group {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 24px;
+        }
+        
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .btn-cancel {
+            background-color: #e0e0e0;
+            color: #555;
+        }
+        
+        .btn-cancel:hover {
+            background-color: #d0d0d0;
+        }
+        
+        .btn-add {
+            background-color: #4285f4;
+            color: white;
+        }
+        
+        .btn-add:hover {
+            background-color: #3367d6;
+        }
+        
+        /* Mobile-first approach - styles above work for mobile */
+        @media (min-width: 768px) {
+            body {
+                padding: 32px;
+            }
+            
+            .container {
+                padding: 32px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Add Bookmark</h1>
+        
+        <form id="bookmark-form">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" id="title" name="title" required placeholder="Enter title">
+            </div>
+            
+            <div class="form-group">
+                <label for="url">URL</label>
+                <input type="url" id="url" name="url" required placeholder="https://example.com">
+            </div>
+            
+            <div class="form-group">
+                <label for="tags">Tags</label>
+                <input type="text" id="tags" name="tags" placeholder="Separate tags with commas">
+            </div>
+            
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" name="description" placeholder="Add notes about this bookmark"></textarea>
+            </div>
+            
+            <div class="button-group">
+                <button type="button" class="btn-cancel">Cancel</button>
+                <button type="submit" class="btn-add">Add</button>
+            </div>
+        </form>
+    </div>
+    
+    <script>
+        
+
+        const readForm = () => {
+            return {
+                title: document.getElementById('title').value,
+                url: document.getElementById('url').value,
+                tags: document.getElementById('tags').value.split(',').map(tag => tag.trim()),
+                description: document.getElementById('description').value
+            };
+        };
+
+        async function postBookmark(bookmark) {
+            try {
+                const response = await fetch('/api/bookmarks', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(bookmark)
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const data = await response.json();
+                console.log('Success:', data);
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        document.getElementById('bookmark-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const bookmark = readForm();
+            postBookmark(bookmark);
+            console.log('Form submitted');
+        });
+        
+        document.querySelector('.btn-cancel').addEventListener('click', function() {
+            document.getElementById('bookmark-form').reset();
+        });
+    </script>
+</body>
+</html>
