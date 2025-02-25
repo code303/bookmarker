@@ -104,12 +104,15 @@ class SQLite {
         return bookmark;
     }
 
-    public deleteBookmark(id: string): void {
-        this.db.run("DELETE FROM bookmarks WHERE id = ?", [id], function (err) {
-            if (err) {
-                return console.error(err.message);
-            }
-            console.log(`A bookmark has been deleted with id ${id}`);
+    public deleteBookmark(id: string): Promise<boolean> {
+        return new Promise((resolve, reject) => {
+            this.db.run("DELETE FROM bookmarks WHERE id = ?", [id], function (err) {
+                if (err) {
+                    reject(err);
+                }
+                console.log(`A bookmark has been deleted with id ${id}`);
+                resolve(true);
+            });
         });
     }
 

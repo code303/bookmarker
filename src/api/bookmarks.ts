@@ -31,9 +31,9 @@ router.put('/:id', (req: Request, res: Response) => {
   res.send(`Update bookmark with id ${req.params.id}`);
 });
 
-router.delete('/:id', (req: Request, res: Response) => {
+router.delete('/:id', async (req: Request, res: Response) => {
   try {
-    database.deleteBookmark(req.params.id);
+    await database.deleteBookmark(req.params.id);
     res.send(`Deleted bookmark with id ${req.params.id}`);
   } catch (error) {
     if (error instanceof Error) {

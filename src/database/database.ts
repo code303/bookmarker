@@ -33,10 +33,9 @@ class Database {
     return `Update bookmark with id ${id}`;
   }
 
-  public deleteBookmark(id: string): boolean {
+  public deleteBookmark(id: string): Promise<boolean> {
     if (this.bookmarkExists(id)) {
-      // ToDo: delete bookmark from database
-      return true;
+      return this.sqlite.deleteBookmark(id);
     } else {
       throw new Error('Bookmark not found');
     }
