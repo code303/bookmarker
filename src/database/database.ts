@@ -25,10 +25,8 @@ class Database {
     return this.sqlite.getBookmark(id);
   }
 
-  public addBookmark(bookmark: Bookmark): Bookmark {
-    // save the bookmark to the database
-    this.sqlite.insertBookmark(bookmark);
-    return bookmark;
+  public addBookmark(bookmark: Bookmark): Promise<Bookmark> {
+    return this.sqlite.insertBookmark(bookmark);
   }
 
   public updateBookmark(id: string): string {

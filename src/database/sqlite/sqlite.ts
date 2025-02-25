@@ -30,16 +30,19 @@ class SQLite {
         this.db.run("CREATE TABLE IF NOT EXISTS bookmarks (id TEXT PRIMARY KEY, title TEXT, url TEXT, description TEXT, tags TEXT, created INTEGER, updated INTEGER)");
     }
 
-    public insertBookmark(bookmark: Bookmark): Bookmark {
-        this.db.run("INSERT INTO bookmarks (id, title, url, description, tags, created, updated) VALUES (?, ?, ?, ?, ?, ?, ?)",
+    public insertBookmark(bookmark: Bookmark): Promise<Bookmark> {
+        
+        return new Promise((resolve, reject) => {
+            this.db.run("INSERT INTO bookmarks (id, title, url, description, tags, created, updated) VALUES (?, ?, ?, ?, ?, ?, ?)",
             [bookmark.id, bookmark.title, bookmark.url, bookmark.description, bookmark.tags.join(','),
             bookmark.created, bookmark.updated], function (err) {
                 if (err) {
-                    return console.error(err.message);
+                    reject(err);
                 }
                 console.log(`A bookmark has been inserted with id ${bookmark.id}`);
+                resolve(bookmark);
             });
-        return bookmark;
+        });
     }
 
     public getBookmarks(): Promise<Bookmark[]> {
