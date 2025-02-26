@@ -68,7 +68,7 @@ class SQLite {
                 resolve(bookmarks);
             });
         }); 
-           
+            
     }
 
     public getBookmark(id: string): Promise<Bookmark> {
