@@ -29,26 +29,30 @@ class Database {
     return this.sqlite.insertBookmark(bookmark);
   }
 
-  public updateBookmark(bookmark: Bookmark): Promise<Bookmark> {
+  public async  updateBookmark(bookmark: Bookmark): Promise<Bookmark> {
     const id: string = bookmark.id;
-    if (this.bookmarkExists(id)) {
+    if (await this.bookmarkExists(id)) {
       return this.sqlite.updateBookmark(bookmark);
     } else {
       return this.addBookmark(bookmark);
     }
   }
 
-  public deleteBookmark(id: string): Promise<boolean> {
-    if (this.bookmarkExists(id)) {
+  public async deleteBookmark(id: string): Promise<boolean> {
+    if (await this.bookmarkExists(id)) {
       return this.sqlite.deleteBookmark(id);
     } else {
       throw new Error('Bookmark not found');
     }
   }
 
-  public bookmarkExists(id: string): boolean {
-    // ToDo: check if bookmark exists in database
-    return true;
+  public async bookmarkExists(id: string): Promise<boolean> {
+    try {
+      const bookmark = await this.sqlite.getBookmark(id);
+      return bookmark !== undefined;
+    } catch (error) {
+      return false;
+    }
   }
 }
 

@@ -13,7 +13,7 @@ class SQLite {
                 console.error(err.message);
                 throw err;
             }
-            console.log('Connected to the database.');
+            console.log('Connected to the database. Path: ' + path.join(__dirname, 'data.sqlite'));
             this.createTableIfNotExists();
             console.log('Table created successfully.');
         });
@@ -48,18 +48,19 @@ class SQLite {
     public getBookmarks(): Promise<Bookmark[]> {
         return new Promise((resolve, reject) => {
             const bookmarks: Bookmark[] = [];
-            this.db.each("SELECT id, title, url, description, tags, created, updated FROM bookmarks", (err, bookmark: Bookmark) => {
+            this.db.each("SELECT id, title, url, description, tags, created, updated FROM bookmarks", (err, row: any) => {
                 if (err) {
                     reject(err);
                 }
+                console.log(JSON.stringify(row));
                 bookmarks.push({
-                    id: bookmark.id,
-                    title: bookmark.title,
-                    url: bookmark.url,
-                    description: bookmark.description,
-                    tags: bookmark.tags,
-                    created: bookmark.created,
-                    updated: bookmark.updated
+                    id: row.id,
+                    title: row.title,
+                    url: row.url,
+                    description: row.description,
+                    tags: row.tags.split(','),
+                    created: row.created,
+                    updated: row.updated
                 } as Bookmark);
             }, (err, count) => {
                 if (err) {
@@ -73,19 +74,19 @@ class SQLite {
 
     public getBookmark(id: string): Promise<Bookmark> {
         return new Promise((resolve, reject) => {
-            this.db.get("SELECT id, title, url, description, tags, created, updated FROM bookmarks WHERE id = ?", [id], (err, bookmark: Bookmark) => {
+            this.db.get("SELECT id, title, url, description, tags, created, updated FROM bookmarks WHERE id = ?", [id], (err, row: any) => {
                 if (err) {
                     reject(err);
                 }
-                if (bookmark) {
+                if (row) {
                     resolve({
-                        id: bookmark.id,
-                        title: bookmark.title,
-                        url: bookmark.url,
-                        description: bookmark.description,
-                        tags: bookmark.tags,
-                        created: bookmark.created,
-                        updated: bookmark.updated
+                        id: row.id,
+                        title: row.title,
+                        url: row.url,
+                        description: row.description,
+                        tags: row.tags.split(','),
+                        created: row.created,
+                        updated: row.updated
                     } as Bookmark);
                 } else {
                     reject(new Error('Bookmark not found'));

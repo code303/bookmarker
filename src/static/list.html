@@ -172,7 +172,7 @@
                     <div class="bookmark-url">${bookmark.url}</div>
                     <div class="bookmark-description">${bookmark.description}</div>
                     <div class="tags-container">
-                        <span class="tag">${bookmark.tags}</span>   
+                        ${bookmark.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                     </div>
                     `;
                 //${bookmark.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
