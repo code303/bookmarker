@@ -1,16 +1,15 @@
 {
   "name": "bookmarker",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A bookmark utility to save and retrieve URLs for later.",
-  "main": "/index.js",
+  "main": "src/index.js",
   "scripts": {
     "clean": "rimraf dist/",
-    "copy-static": "copyfiles -u 1 src/frontend/static/**/* dist/",
-    "copy": "copyfiles -u 1 build/backend/**/* dist/backend/",
-    "build": "npm run clean && tsc && npm run copy-static && npm run copy",
+    "copy": "copyfiles -u 1 build/**/* dist/",
+    "build": "npm run clean && tsc && npm run copy",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node dist/backend/index.js",
-    "dev": "npx nodemon ./src/backend/index.ts"
+    "start": "node dist/index.js",
+    "dev": "npx nodemon ./src/index.ts"
   },
   "repository": {
     "type": "git",
