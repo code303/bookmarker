@@ -130,4 +130,4 @@ dist
 .pnp.*
 
 build/
-src/database/sqlite/data.sqlite
+src/backend/database/sqlite/data.sqlite

@@ -5,7 +5,8 @@ RUN npm install
 COPY . .
 RUN npm run build
 
-FROM nginx:alpine
-COPY --from=build /app/dist /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+FROM node:18.0.0-alpine3.15 as backend
+WORKDIR /app
+COPY --from=build /app/ ./
+EXPOSE 3000
+CMD ["node", "index.js"]
