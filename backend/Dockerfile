@@ -7,6 +7,6 @@ RUN npm run build
 
 FROM node:18.0.0-alpine3.15 AS backend
 WORKDIR /app
-COPY --from=build /app/dist ./
+COPY --from=build /app/dist/* ./dist/
 EXPOSE 3000
 CMD ["node", "index.js"]
