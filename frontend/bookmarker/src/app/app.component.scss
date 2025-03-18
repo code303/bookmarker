@@ -1,0 +1,38 @@
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #333;
+    color: white;
+    padding: 1rem;
+    z-index: 1000;
+}
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+nav ul li {
+    display: inline;
+    margin-right: 1rem;
+}
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+.content {
+    display: flex;
+    margin-top: 52px; /* Adjust based on header height */
+    min-height: calc(100vh - 52px); /* Full viewport height minus header */
+}
+.column {
+    padding: 1rem;
+}
+.left-column, .right-column {
+    flex: 1;
+    background-color: #f0f0f0;
+}
+.main-column {
+    flex: 2;
+}
