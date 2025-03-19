@@ -1,8 +1,8 @@
 FROM node:18.0.0-alpine3.15 AS build
 WORKDIR /app
-COPY package*.json ./
+COPY bookmarker/package*.json ./
 RUN npm ci
-COPY . .
+COPY bookmarker/* .
 RUN npm run build --prod
 
 #FROM node:18.0.0-alpine3.15 AS backend
