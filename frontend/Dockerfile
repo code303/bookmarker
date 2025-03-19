@@ -1,4 +1,4 @@
-FROM node:18.0.0-alpine3.15 AS build
+FROM node:22-alpine AS build
 WORKDIR /app
 COPY bookmarker/package*.json ./
 RUN npm ci
