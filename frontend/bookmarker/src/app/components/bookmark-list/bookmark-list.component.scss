@@ -1,0 +1,17 @@
+$backcolor: rgb(240, 240, 240);
+.card {
+  background-color: $backcolor;
+  margin-bottom: 1em;
+}
+
+.card-body {
+  padding: 0.5em;
+  h3 {
+    margin-top: 2px;
+  }
+}
+
+.card-text {
+  font-size: 0.8em;
+  color: $backcolor
+}

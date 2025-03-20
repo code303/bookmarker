@@ -1,1 +1,10 @@
 <p>bookmark-list works!</p>
+  <div class="card" *ngFor="let bookmark of bookmarks">
+    <div class="card-body">
+      <h3 class="card-title">{{ bookmark.title }}</h3>
+      <p class="card-text">{{ bookmark.url }}</p>
+      <button class="btn btn-danger" (click)="deleteBookmark(bookmark)">Delete</button>
+    </div>
+  </div>
+
+<p>end</p>
